@@ -1,0 +1,6 @@
+.venv
+telemetry_sessions
+__pycache__
+config.json
+.adk
+clearcut_lock
