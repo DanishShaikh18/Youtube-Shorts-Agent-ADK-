@@ -1,5 +1,5 @@
 from google import genai
-from google.adk.agents import LlmAgent
+from google.adk.agents import LlmAgent, LoopAgent
 from google.adk.models import Gemini
 from google.adk.tools import google_search
 
@@ -38,11 +38,21 @@ formatter_agent = LlmAgent(
 ) 
 
 #---LLM Agent ----
-youtube_shorts_agent = LlmAgent(
+# youtube_shorts_agent = LlmAgent(
+#     name = "youtube_shorts_agent",
+#     model=vertex_model,
+#     description = "An agent that generates YouTube Shorts video scripts based on user prompts.",
+#     instruction = load_instruction_from_file("shorts_agent_instructions.txt"),
+#     sub_agents = [
+#         scriptwriter_agent, 
+#         visualizer_agent,
+#         formatter_agent
+#     ]
+# )
+
+youtube_shorts_agent = LoopAgent(
     name = "youtube_shorts_agent",
-    model=vertex_model,
-    description = "An agent that generates YouTube Shorts video scripts based on user prompts.",
-    instruction = load_instruction_from_file("shorts_agent_instructions.txt"),
+    max_iterations=3,
     sub_agents = [
         scriptwriter_agent, 
         visualizer_agent,
